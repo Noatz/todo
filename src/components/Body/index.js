@@ -5,7 +5,7 @@ import './styles.css';
 const Body = ({data, addItem}) => {
   const { project } = useParams();
   const content = data[project];
-  if (content === undefined) return <Fragment></Fragment>
+  if (content === undefined) return <Fragment>Something went wrong?!</Fragment>
 
   const showHideAddItem = e => {
     const element = document.getElementById("add-item");
