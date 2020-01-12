@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import SideNav from './components/SideNav';
+import Body from './components/Body';
 
-function App() {
+const App = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const data = [
+      {name: 'Home', items: ['Clean kitchen', 'Feed dogs']},
+      {name: 'Work', items: ['Send invoice', 'Prepare for daily standup']},
+      {name: 'Hustle', items: []}
+    ]
+    setData(data);
+  }, []);
+
+  const addProject = (projectName) => {
+    setData(prev => {
+      return [...prev, {name: projectName, items: []}];
+    });
+  }
+
+  const addItem = (i, item) => {
+    setData(prev => {
+      prev[i] = {name: prev[i].name, items: prev[i].items.concat([item])};
+      return [...prev];
+    });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div style={style}>
+        <SideNav data={data} addProject={addProject}/>
+        <Switch>
+          <Route path="/:project">
+            <Body data={data} addItem={addItem}/>
+          </Route>
+          <Route path="*">
+            <Redirect to="/0"/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
+}
+
+const style = {
+  display: "flex"
 }
 
 export default App;
