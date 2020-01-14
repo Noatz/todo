@@ -11,3 +11,8 @@ nav {
 hr {
   border: 1px solid black;
 }
+
+input[type=checkbox]:checked + label {
+  text-decoration: line-through;
+  color: #aaa;
+}
