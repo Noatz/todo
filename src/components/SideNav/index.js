@@ -26,7 +26,7 @@ const SideNav = ({data, addProject}) => {
       <div id="projects">
         {data.map((project, i) => (
           <NavLink key={i} to={`${i}`} className="link-item" activeClassName="link-item-active">
-            <li className="li-item">{project.name}</li>
+            <h4 className="project-item">{project.name}</h4>
           </NavLink>
         ))}
 

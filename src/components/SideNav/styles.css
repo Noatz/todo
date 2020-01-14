@@ -1,7 +1,9 @@
-.li-item {
+.project-item {
   background-color: inherit;
   border-radius: 5px;
   padding: 5px;
+  margin: 0;
+  font-weight: normal;
 }
 
 .link-item {
@@ -9,6 +11,6 @@
   outline: none;
   color: black;
 }
-.link-item-active {
+.link-item:hover, .link-item-active {
   background-color: #eee;
 }

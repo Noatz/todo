@@ -28,13 +28,27 @@ const App = () => {
     });
   }
 
+  const editItem = (i, j, changedValue) => {
+    setData(prev => {
+      prev[i].items[j] = changedValue;
+      return [...prev];
+    });
+  }
+
+  const deleteItem = (e, i, j) => {
+    setData(prev => {
+      prev[i].items.splice(j, 1);
+      return [...prev];
+    });
+  }
+
   return (
     <Router>
       <div style={style}>
         <SideNav data={data} addProject={addProject}/>
         <Switch>
           <Route path="/:project">
-            <Body data={data} addItem={addItem}/>
+            <Body data={data} addItem={addItem} editItem={editItem} deleteItem={deleteItem}/>
           </Route>
           <Route path="*">
             <Redirect to="/0"/>
